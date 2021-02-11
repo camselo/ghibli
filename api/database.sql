@@ -1,0 +1,20 @@
+DROP DATABASE `Ghibli`;
+
+CREATE DATABASE IF NOT EXISTS `Ghibli`;
+
+USE `Ghibli`;
+
+CREATE TABLE IF NOT EXISTS `Movie`(
+	`id` INT AUTO_INCREMENT PRIMARY KEY,
+    `title` VARCHAR(255) NOT NULL,
+    `director` VARCHAR(255) NOT NULL,
+    `release_date` DATE NOT NULL,
+    `genre` VARCHAR(255) NOT NULL,
+    `poster` VARCHAR(255) NOT NULL
+);
+SELECT* FROM Movie;
+
+
+
+
+
