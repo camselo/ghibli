@@ -11,7 +11,7 @@ import { Movie } from './movie';
 })
 
 export class MovieService {
-  baseUrl = 'http://localhost/ghibli/angular/api';
+  baseUrl = 'http://localhost/2020/repositorios/ghibli/angular/api';
   movies : Movie[];
 
   constructor(private http: HttpClient) {}

@@ -28,7 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = json_decode(file_get_contents("php://input"));
 
-    var_dump($data);
+    // var_dump($data);
+    var_dump($data[0]->title);
+
+    if ($data->title == NULL) {
+        $data = $data[0];
+    }
 
     if (isset($data->title) && isset($data->director) && isset($data->release_date) && isset($data->genre) && isset($data->poster)) {
     

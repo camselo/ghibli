@@ -13,7 +13,7 @@
 
 <div id="form">
   <h2>Form</h2>
-  <form #g="ngForm" name="form" (submit)="getMovie(g)">
+  <form #g="ngForm" name="form" (submit)="addMovie(f)">
     <div class="form-group">
       <label>Id</label>
       <input type="text" 
@@ -21,8 +21,7 @@
              name="id" 
              [(ngModel)]="movie2.id" 
              #movieModels="ngModel" 
-             required 
-             pattern="^[0-9]*$">
+             required>
       <span class="help-block danger" *ngIf="movieModels.errors?.required && movieModels.touched">
         The id is required
       </span>
