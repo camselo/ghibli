@@ -28,6 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = json_decode(file_get_contents("php://input"));
 
+    var_dump($data);
+
     if (isset($data->title) && isset($data->director) && isset($data->release_date) && isset($data->genre) && isset($data->poster)) {
     
         $movie->title = $data->title;
@@ -39,7 +41,7 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $response = $movie->createMovie();
     
     } else {
-        $response = array("status" => 401, "message" => "Malformed request.");
+        $response = array("status" => 400, "message" => "Malformed request.");
     }
 
     http_response_code($response["status"]);

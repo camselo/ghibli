@@ -30,7 +30,7 @@
         The id only contain numbers
       </span>
     </div>
-    <button class="btn btn-primary btn-sm" [disabled]"g.invalid">
+    <button class="btn btn-primary btn-sm" [disabled]="g.invalid">
       Search
     </button>
   </form>
@@ -65,8 +65,7 @@
              name="title"
              [(ngModel)]="movie.title"
              #movieModel="ngModel"
-             required
-             pattern="^[a-zA-Z]+$">
+             required>
       <span class="help-block danger" *ngIf="movieModel.errors?.required && movieModel.touched">
         The title is required
       </span>
@@ -75,7 +74,72 @@
       </span>
     </div>
 
-    <button class="btn btn-primary btn-sm" [disabled]"f.invalid">
+    <div class="form-group">
+      <label>Director</label>
+      <input type="text"
+             class="form-control"
+             name="director"
+             [(ngModel)]="movie.director"
+             #movieModel="ngModel"
+             required>
+      <span class="help-block danger" *ngIf="movieModel.errors?.required && movieModel.touched">
+        The title is required
+      </span>
+      <span class="help-block danger" *ngIf="movieModel.errors?.pattern && movieModel.touched">
+        The title can only contain letters from a-z/A-Z
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label>Release Date</label>
+      <input type="text"
+             class="form-control"
+             name="release_date"
+             [(ngModel)]="movie.release_date"
+             #movieModel="ngModel"
+             required>
+      <span class="help-block danger" *ngIf="movieModel.errors?.required && movieModel.touched">
+        The title is required
+      </span>
+      <span class="help-block danger" *ngIf="movieModel.errors?.pattern && movieModel.touched">
+        The title can only contain letters from a-z/A-Z
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label>Genre</label>
+      <input type="text"
+             class="form-control"
+             name="genre"
+             [(ngModel)]="movie.genre"
+             #movieModel="ngModel"
+             required>
+      <span class="help-block danger" *ngIf="movieModel.errors?.required && movieModel.touched">
+        The title is required
+      </span>
+      <span class="help-block danger" *ngIf="movieModel.errors?.pattern && movieModel.touched">
+        The title can only contain letters from a-z/A-Z
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label>Poster</label>
+      <input type="text"
+             class="form-control"
+             name="poster"
+             [(ngModel)]="movie.poster"
+             #movieModel="ngModel"
+             required>
+      <span class="help-block danger" *ngIf="movieModel.errors?.required && movieModel.touched">
+        The title is required
+      </span>
+      <span class="help-block danger" *ngIf="movieModel.errors?.pattern && movieModel.touched">
+        The title can only contain letters from a-z/A-Z
+      </span>
+    </div>
+
+    <button class="btn btn-primary btn-sm" [disabled]="f.invalid">
+
       Add
     </button>
   </form>

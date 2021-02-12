@@ -35,19 +35,20 @@ export class AppComponent implements OnInit {
     );
   }
 
-  getMovie(g) : void {
-    this.movieService.getOne(g).subscribe(
-      (res: Movie) => {
-        this.movie2 = res;
-        this.search = 'Ok';
-      },
-      (err) => {
-        this.error = err;
-      }
-    );
-  }
+  // getMovie(g) : void {
+  //   this.movieService.getOne(g).subscribe(
+  //     (res: Movie) => {
+  //       this.movie2 = res;
+  //       this.search = 'Ok';
+  //     },
+  //     (err) => {
+  //       this.error = err;
+  //     }
+  //   );
+  // }
 
   addMovie(f) {
+    console.log(f);
     this.error = '';
     this.success = '';
 
