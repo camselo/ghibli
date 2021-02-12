@@ -1,27 +1,12 @@
-<div *ngIf="error">{{error}}</div>
-<div *ngIf="success">{{success}}</div>
-<div *ngIf="search == 'Ok'">Fetched movie: {{movie2.title}}</div>
-
-<div id="list">
-  <h2>List of Studio Ghibli works</h2>
-  <ul>
-    <li *ngFor="let movie of movies">
-      {{movie.title}} | {{movie.director}} | {{movie.release_date}} | {{movie.genre}} | {{movie.poster}}
-    </li>
-  </ul>
-</div>
-
+<!-- <div *ngIf="error">{{error}}</div> -->
+<!-- <div *ngIf="success">{{success}}</div> -->
+<!-- <div *ngIf="search == 'Ok'">Fetched movie: {{movies[0].title}}</div> -->
 <div id="form">
-  <h2>Form</h2>
-  <form #g="ngForm" name="form" (submit)="addMovie(f)">
+  <h2>Search movie</h2>
+  <form #g="ngForm" name="form" (submit)="getMovie(g)">
     <div class="form-group">
       <label>Id</label>
-      <input type="text" 
-             class="form-control" 
-             name="id" 
-             [(ngModel)]="movie2.id" 
-             #movieModels="ngModel" 
-             required>
+      <input type="text" class="form-control" name="id" [(ngModel)]="movie.id" #movieModels="ngModel" required>
       <span class="help-block danger" *ngIf="movieModels.errors?.required && movieModels.touched">
         The id is required
       </span>
@@ -37,8 +22,21 @@
 
 <hr>
 
+<div id="list">
+  <h2>List of Studio Ghibli works</h2>
+  <ul>
+    <li *ngFor="let movie of movies">
+      {{movie.title}} | {{movie.director}} | {{movie.release_date}} | {{movie.genre}} |  <img src="{{movie.poster}}" width="100" />
+    </li>
+  </ul>
+</div>
+
+<button *ngIf="search == 'Ok'" (click)="getMovies()" >show all movies</button>
+
+<hr>
+
 <div id="mainForm">
-  <h2>Form</h2>
+  <h2>Add movie</h2>
   <form #f="ngForm" name="mainForm" (submit)="addMovie(f)">
     <!-- <div class="form-group">
       <label>Id</label>

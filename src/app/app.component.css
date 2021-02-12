@@ -1,0 +1,7 @@
+.list {
+}
+
+.list li {
+  display: flex;
+  align-items: center;
+}

@@ -12,9 +12,7 @@ CREATE TABLE IF NOT EXISTS `Movie`(
     `genre` VARCHAR(255) NOT NULL,
     `poster` VARCHAR(255) NOT NULL
 );
-SELECT* FROM Movie;
 
+INSERT INTO `Movie`(`title`, `director`, `release_date`, `genre`, `poster`) VALUES ("O Meu Vizinho Totoro", "Hayao Miyazaki", "1995-03-08", "Animação", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAZish2n99p_FbSsSv5zNzK0X3clcQhQmC1Zimm-HAtDQiYod7")
 
-
-
-
+SELECT * FROM Movie;

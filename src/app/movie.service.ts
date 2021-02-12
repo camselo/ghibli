@@ -11,14 +11,14 @@ import { Movie } from './movie';
 })
 
 export class MovieService {
-  baseUrl = 'http://localhost/2020/repositorios/ghibli/angular/api';
+  baseUrl = 'http://localhost/ghibli/api';
   movies : Movie[];
 
   constructor(private http: HttpClient) {}
   movie : Movie;
 
   getAll(): Observable<Movie[]> {
-    return this.http.get(`${this.baseUrl}/movie`).pipe(
+    return this.http.get(`${this.baseUrl}/movie.php`).pipe(
       map((res) => {
         this.movies = res['data'];
         return this.movies;
@@ -27,18 +27,15 @@ export class MovieService {
       catchError(this.handleError));
   }
 
-  // getOne(id: any): Observable<Movie> {
-  //   console.log(id.value);
-  //   return this.http.get(`${this.baseUrl}/movie`, {params: id.value}).pipe(
-  //   map((res) => {
-  //     console.log(res['solo']);
-  //     this.movie = res['solo'];
-  //     console.log(this.movie);
-  //     return this.movie;
-  //   }
-  //   ), 
-  //   catchError(this.handleError));
-  // }
+  getOne(id: any): Observable<Movie> {  
+    return this.http.get(`${this.baseUrl}/movie.php`, {params: id.value}).pipe(
+    map((res) => {
+      this.movie = res['data'];
+      return this.movie;
+    }
+    ), 
+    catchError(this.handleError));
+  }
 
   private handleError(error: HttpErrorResponse){
     console.log(error);
@@ -47,7 +44,7 @@ export class MovieService {
 
   store(movie: Movie): Observable<Movie[]> {
     console.log(movie)
-    return this.http.post(`${this.baseUrl}/movie`, { data: movie })
+    return this.http.post(`${this.baseUrl}/movie.php`, { data: movie })
       .pipe(map((res) => {
         this.movies.push(res['data']);
         return this.movies;

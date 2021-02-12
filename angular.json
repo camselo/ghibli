@@ -20,7 +20,6 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
@@ -119,6 +118,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ghibli"
+    }
+  },
+  "defaultProject": "ghibli",
+  "cli": {
+    "analytics": "dfbef168-8560-447e-b25f-9846a1ba0070"
+  }
 }

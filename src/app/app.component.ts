@@ -12,12 +12,10 @@ export class AppComponent implements OnInit {
   error : '';
   success : String;
   movie : any;
-  movie2 : any;
   search : any;
 
   constructor(private movieService: MovieService){
-    this.movie = new Movie('', '', '', '', '', 0);
-    this.movie2 = new Movie('', '', '', '', '', 0);
+    this.movie = new Movie();
   }
 
   ngOnInit(){
@@ -35,20 +33,24 @@ export class AppComponent implements OnInit {
     );
   }
 
-  // getMovie(g) : void {
-  //   this.movieService.getOne(g).subscribe(
-  //     (res: Movie) => {
-  //       this.movie2 = res;
-  //       this.search = 'Ok';
-  //     },
-  //     (err) => {
-  //       this.error = err;
-  //     }
-  //   );
-  // }
+  getMovie(f) : void {
+    this.error = '';
+    this.success = '';
+    this.movieService.getOne(f).subscribe(
+      (res: Movie[]) => {
+        this.movies = res;
+        
+        this.search = 'Ok';
+
+        f.reset();
+      },
+      (err) => {
+        this.error = err;
+      }
+    );
+  }
 
   addMovie(f) {
-    console.log(f);
     this.error = '';
     this.success = '';
 
