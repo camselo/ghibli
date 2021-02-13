@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
     this.movieService.getAll().subscribe(
       (res: Movie[]) => {
         this.movies = res;
+        this.search = null;
       },
       (err) => {
         this.error = err;
@@ -40,9 +41,7 @@ export class AppComponent implements OnInit {
       (res: Movie[]) => {
         this.movies = res;
         
-        this.search = 'Ok';
-
-        f.reset();
+        this.search = 'ok';
       },
       (err) => {
         this.error = err;

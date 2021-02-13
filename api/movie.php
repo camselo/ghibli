@@ -8,49 +8,53 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 
-if (!$_SERVER['REQUEST_METHOD'] === 'GET' || !$_SERVER['REQUEST_METHOD'] === 'POST') {
-    http_response_code(405);
-    echo json_encode(array(
-        "status" => 405,
-        "message" => "You cannot " . $_SERVER['REQUEST_METHOD'] . " this endpoint."
-    ));
-    exit();
-}
+switch ($_SERVER['REQUEST_METHOD']) {
+    case 'GET':
+        $database = new Database();
+        $db = $database->getConnection();
 
-$database = new Database();
-$db = $database->getConnection();
-    
-$movie = new Movie($db);
+        $movie = new Movie($db);
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if ($_GET['id']) {
-        $movie->id = (int) $_GET['id'];
-        $response = $movie->getMovie();
-    } else {
-        $response = $movie->getAllMovies();  
-    }
-    http_response_code($response["status"]);
-    echo json_encode($response);
-} 
+        if ($_GET['id']) {
+            $movie->id = (int) $_GET['id'];
+            $response = $movie->getMovie();
+        } else {
+            $response = $movie->getAllMovies();
+        }
+        http_response_code($response["status"]);
+        echo json_encode($response);
+        
+        break;
+    case 'POST':
+        $data = json_decode(file_get_contents("php://input"));
+        $data = $data->data;
 
-else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $data = json_decode(file_get_contents("php://input"));
-    $data = $data->data;
+        if (isset($data->title) && isset($data->director) && isset($data->release_date) && isset($data->genre) && isset($data->poster)) {
+            $database = new Database();
+            $db = $database->getConnection();
 
-    if (isset($data->title) && isset($data->director) && isset($data->release_date) && isset($data->genre) && isset($data->poster)) {
-    
-        $movie->title = $data->title;
-        $movie->director = $data->director;
-        $movie->release_date = $data->release_date;
-        $movie->genre = $data->genre;
-        $movie->poster = $data->poster;
+            $movie = new Movie($db);
 
-        $response = $movie->createMovie();
-    
-    } else {
-        $response = array("status" => 400, "message" => "Malformed request.");
-    }
+            $movie->title = $data->title;
+            $movie->director = $data->director;
+            $movie->release_date = $data->release_date;
+            $movie->genre = $data->genre;
+            $movie->poster = $data->poster;
 
-    http_response_code($response["status"]);
-    echo json_encode($response);
+            $response = $movie->createMovie();
+        } else {
+            $response = array("status" => 400, "message" => "Malformed request.");
+        }
+
+        http_response_code($response["status"]);
+        echo json_encode($response);
+
+        break;
+    default:
+        http_response_code(405);
+        echo json_encode(array(
+            "status" => 405,
+            "message" => "You cannot " . $_SERVER['REQUEST_METHOD'] . " this endpoint."
+        ));
+        break;
 }

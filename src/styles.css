@@ -131,11 +131,37 @@ app-root {
   flex-direction: column;
   max-width: 960px;
   margin: 0 auto;
+  font-family: "Open Sans", sans-serif;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
+  margin: 16px 0;
+}
+
+.form-group input {
+  border: 2px solid lightcoral;
+  padding: 8px;
+  line-height: 16px;
+}
+
+.form-group label {
+  color: lightcoral;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.form-group div {
+  display: flex;
+}
+
+.form-group div button {
+  height: 36px;
+}
+
+.form-group div input {
+  flex: 1;
 }
 
 button {

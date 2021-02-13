@@ -1,7 +1,49 @@
-.list {
+.movie-grid {
+  margin: 24px 0;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
 }
 
-.list li {
+.movie-item {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+}
+
+.movie-item-details {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.movie-item-details img {
+  width: 220px;
+  height: 330px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.movie-item-details h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.movie-item-details div {
+  margin-top: auto;
+}
+
+.movie-item-details h4 {
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+.movie-item-details h5 {
+  margin-bottom: 4px;
+}
+
+.danger {
+  margin: 8px 0;
+  color: red;
 }
