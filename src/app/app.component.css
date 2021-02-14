@@ -17,8 +17,7 @@
   height: 100%;
 }
 
-.movie-item-details img {
-  width: 220px;
+.movie-item img {
   height: 330px;
   object-fit: cover;
   object-position: center;

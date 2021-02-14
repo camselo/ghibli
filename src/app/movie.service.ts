@@ -11,14 +11,14 @@ import { Movie } from './movie';
 })
 
 export class MovieService {
-  baseUrl = 'http://localhost/ghibli/api';
+  baseUrl = 'https://ghibli-movies.000webhostapp.com/api/v1';
   movies : Movie[];
 
   constructor(private http: HttpClient) {}
   movie : Movie;
 
   getAll(): Observable<Movie[]> {
-    return this.http.get(`${this.baseUrl}/movie.php`).pipe(
+    return this.http.get(`${this.baseUrl}/movie`).pipe(
       map((res) => {
         this.movies = res['data'];
         return this.movies;
@@ -28,7 +28,7 @@ export class MovieService {
   }
 
   getOne(id: any): Observable<Movie> {  
-    return this.http.get(`${this.baseUrl}/movie.php`, {params: id.value}).pipe(
+    return this.http.get(`${this.baseUrl}/movie`, {params: id.value}).pipe(
     map((res) => {
       this.movie = res['data'];
       return this.movie;
@@ -44,7 +44,7 @@ export class MovieService {
 
   store(movie: Movie): Observable<Movie[]> {
     console.log(movie)
-    return this.http.post(`${this.baseUrl}/movie.php`, { data: movie })
+    return this.http.post(`${this.baseUrl}/movie`, { data: movie })
       .pipe(map((res) => {
         this.movies.push(res['data']);
         return this.movies;

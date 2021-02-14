@@ -28,7 +28,7 @@
   <h2>Lista dos trabalhos da Ghibli Studio</h2>
   <section class="movie-grid">
     <article class="movie-item" *ngFor="let movie of movies">
-      <img src="{{movie.poster}}" />
+      <img src="{{movie.poster}}" alt="{{movie.id}} - {{movie.title}}" />
       <div class="movie-item-details">
         <h3>{{movie.title}}</h3>
         <div>
@@ -91,7 +91,7 @@
     </div>
 
     <div class="form-group">
-      <label>Genre</label>
+      <label>Gênero</label>
       <input type="text"
              class="form-control"
              name="genre"

@@ -1,21 +1,25 @@
 <?php
 
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Expose-Headers: Content-Length, X-JSON");
+header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, Accept, Accept-Language, X-Authorization");
+header('Access-Control-Max-Age: 86400');
+
 require_once './classes/Movie.php';
 require_once './classes/Database.php';
 
-header("Content-Type: application/json; charset=UTF-8");
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
-
 switch ($_SERVER['REQUEST_METHOD']) {
+    case 'OPTIONS':
+        header("HTTP/1.1 200 OK");
+        break;
     case 'GET':
         $database = new Database();
         $db = $database->getConnection();
 
         $movie = new Movie($db);
 
-        if ($_GET['id']) {
+        if (isset($_GET['id'])) {
             $movie->id = (int) $_GET['id'];
             $response = $movie->getMovie();
         } else {
@@ -26,20 +30,19 @@ switch ($_SERVER['REQUEST_METHOD']) {
         
         break;
     case 'POST':
-        $data = json_decode(file_get_contents("php://input"));
-        $data = $data->data;
+        $request = json_decode(file_get_contents("php://input"));
 
-        if (isset($data->title) && isset($data->director) && isset($data->release_date) && isset($data->genre) && isset($data->poster)) {
+        if (isset($request->data->title) && isset($request->data->director) && isset($request->data->release_date) && isset($request->data->genre) && isset($request->data->poster)) {
             $database = new Database();
             $db = $database->getConnection();
 
             $movie = new Movie($db);
 
-            $movie->title = $data->title;
-            $movie->director = $data->director;
-            $movie->release_date = $data->release_date;
-            $movie->genre = $data->genre;
-            $movie->poster = $data->poster;
+            $movie->title = $request->data->title;
+            $movie->director = $request->data->director;
+            $movie->release_date = $request->data->release_date;
+            $movie->genre = $request->data->genre;
+            $movie->poster = $request->data->poster;
 
             $response = $movie->createMovie();
         } else {

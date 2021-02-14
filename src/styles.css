@@ -130,6 +130,7 @@ app-root {
   /* justify-content: center; */
   flex-direction: column;
   max-width: 960px;
+  padding: 24px;
   margin: 0 auto;
   font-family: "Open Sans", sans-serif;
 }
